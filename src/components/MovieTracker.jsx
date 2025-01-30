@@ -2,34 +2,28 @@ import { useState } from "react";
 import "./MovieTracker.css";
 
 function MovieTracker() {
-  const [movies, setMovies] = useState([]); // Список фильмов
-  const [movieName, setMovieName] = useState(""); // Текущий ввод в инпуте
-  const [editIndex, setEditIndex] = useState(null); // Индекс редактируемого фильма
+  const [movies, setMovies] = useState([]); 
+  const [movieName, setMovieName] = useState(""); 
+  const [editIndex, setEditIndex] = useState(null); 
 
-  // Добавление или редактирование фильма
+
   const handleAddOrEditMovie = () => {
-    if (movieName.trim() === "") return; // Не добавлять пустую строку
+    if (movieName.trim() === "") return; 
 
     if (editIndex !== null) {
-      // Редактирование существующего фильма
       const updatedMovies = [...movies];
       updatedMovies[editIndex] = movieName;
       setMovies(updatedMovies);
       setEditIndex(null);
     } else {
-      // Добавление нового фильма
       setMovies([...movies, movieName]);
     }
 
-    setMovieName(""); // Очистка инпута
+    setMovieName("");
   };
-
-  // Удаление фильма
   const handleDeleteMovie = (index) => {
     setMovies(movies.filter((_, i) => i !== index));
   };
-
-  // Редактирование фильма
   const handleEditMovie = (index) => {
     setMovieName(movies[index]);
     setEditIndex(index);
